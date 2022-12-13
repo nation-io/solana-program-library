@@ -5920,7 +5920,7 @@ name = "spl-feature-proposal-cli"
 version = "1.2.0"
 dependencies = [
  "chrono",
- "clap 2.34.0",
+ "clap 3.2.17",
  "solana-clap-utils",
  "solana-cli-config",
  "solana-client",
@@ -6186,7 +6186,7 @@ dependencies = [
  "bincode",
  "borsh",
  "bs58",
- "clap 2.34.0",
+ "clap 3.2.17",
  "serde",
  "serde_derive",
  "serde_json",
@@ -6300,7 +6300,7 @@ name = "spl-token-cli"
 version = "2.2.0"
 dependencies = [
  "assert_cmd",
- "clap 2.34.0",
+ "clap 3.2.17",
  "console",
  "indicatif",
  "serde",
@@ -6371,7 +6371,7 @@ dependencies = [
 name = "spl-token-lending-cli"
 version = "0.2.0"
 dependencies = [
- "clap 2.34.0",
+ "clap 3.2.17",
  "solana-clap-utils",
  "solana-cli-config",
  "solana-client",
