@@ -8,10 +8,7 @@ use std::slice::Iter;
 use solana_program::borsh::try_from_slice_unchecked;
 use solana_program::clock::{Slot, UnixTimestamp};
 
-use solana_program::{
-    account_info::AccountInfo, program_error::ProgramError, program_pack::IsInitialized,
-    pubkey::Pubkey,
-};
+use solana_program::{account_info::AccountInfo, msg, program_error::ProgramError, program_pack::IsInitialized, pubkey::Pubkey};
 use spl_governance_tools::account::{get_account_data, AccountMaxSize};
 
 use crate::addins::max_voter_weight::{
@@ -969,6 +966,7 @@ pub fn assert_valid_proposal_options(
     vote_type: &VoteType,
 ) -> Result<(), ProgramError> {
     if options.is_empty() || options.len() > 10 {
+        msg!("fst {:?}", options);
         return Err(GovernanceError::InvalidProposalOptions.into());
     }
 
@@ -979,8 +977,9 @@ pub fn assert_valid_proposal_options(
     {
         if options.len() == 1
             || max_voter_options as usize != options.len()
-            || max_winning_options as usize != options.len()
+            || max_winning_options < 1
         {
+            msg!("snd");
             return Err(GovernanceError::InvalidProposalOptions.into());
         }
     }
@@ -989,6 +988,7 @@ pub fn assert_valid_proposal_options(
     // The options are identified by index so it's ok for now
 
     if options.iter().any(|o| o.is_empty()) {
+        msg!("trd");
         return Err(GovernanceError::InvalidProposalOptions.into());
     }
 

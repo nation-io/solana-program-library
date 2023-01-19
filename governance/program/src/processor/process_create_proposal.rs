@@ -1,13 +1,6 @@
 //! Program state processor
 
-use solana_program::{
-    account_info::{next_account_info, AccountInfo},
-    clock::Clock,
-    entrypoint::ProgramResult,
-    pubkey::Pubkey,
-    rent::Rent,
-    sysvar::Sysvar,
-};
+use solana_program::{account_info::{next_account_info, AccountInfo}, clock::Clock, entrypoint::ProgramResult, msg, pubkey::Pubkey, rent::Rent, sysvar::Sysvar};
 use spl_governance_addin_api::voter_weight::VoterWeightAction;
 use spl_governance_tools::account::create_and_serialize_account_signed;
 
@@ -35,6 +28,11 @@ pub fn process_create_proposal(
     options: Vec<String>,
     use_deny_option: bool,
 ) -> ProgramResult {
+    let vote_type = if let VoteType::MultiChoice { max_voter_options, max_winning_options } = vote_type {
+        VoteType::MultiChoice { max_voter_options, max_winning_options: 1 }
+    } else {
+        vote_type
+    };
     let account_info_iter = &mut accounts.iter();
 
     let realm_info = next_account_info(account_info_iter)?; // 0

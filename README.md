@@ -1,3 +1,24 @@
+# **Running**
+
+install
+```bash
+yarn
+```
+
+build governance:
+```bash
+cd governance
+cargo build-bpf
+```
+
+download `spl-governance_keypair.json` into `target/deploy` from nation 1password
+
+start validator
+```bash
+yarn amman start
+```
+
+
 [![Build status][travis-image]][travis-url]
 
 [travis-image]:
